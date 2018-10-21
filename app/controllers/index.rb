@@ -1,3 +1,32 @@
-get '/' do
+get '/participants' do
+  @participants = Participant.all.order(:time)
+  erb :"participants/index"
+end
 
+get '/participants/new' do
+  @participant = Participant.new
+  erb :"/participants/new"
+end
+
+post '/participants' do
+  @participant = Participant.new(params[:participant])
+
+  if @participant.save
+    redirect "/game/#{@participant.id}"
+  else
+    erb :"/participants/new"
+  end
+end
+
+patch '/participants/:id' do
+  @participant = Participant.find(params[:id])
+  @participant.time = params[:time]
+  @participant.save
+
+  status 200
+end
+
+get '/game/:participant_id' do
+  @participant = Participant.find(params[:participant_id])
+  erb :"/game"
 end

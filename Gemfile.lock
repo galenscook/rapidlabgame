@@ -69,6 +69,9 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.4)
       tilt (~> 2.0)
+    sinatra-activerecord (2.0.13)
+      activerecord (>= 3.2)
+      sinatra (>= 1.0)
     sinatra-contrib (2.0.4)
       activesupport (>= 4.0.0)
       backports (>= 2.8.2)
@@ -101,10 +104,11 @@ DEPENDENCIES
   shotgun
   shoulda-matchers
   sinatra
+  sinatra-activerecord
   sinatra-contrib
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.3.7p456
 
 BUNDLED WITH
-   1.16.2
+   1.16.6

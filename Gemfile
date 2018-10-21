@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.3.7'
 
 # PostgreSQL driver
 gem 'pg'
@@ -10,6 +10,7 @@ gem 'sinatra-contrib'
 
 gem 'activesupport'
 gem 'activerecord'
+gem 'sinatra-activerecord'
 
 gem 'rake'
 

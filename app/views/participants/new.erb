@@ -1,0 +1,19 @@
+<div>
+  <h2>Enter your information to play</h2>
+
+  <form id="participant_form" method="post" action="/participants">
+
+    <label for="participant[first_name]">First Name</label>
+    <input type="text" name="participant[first_name]" value="<%= @participant.first_name %>" autofocus>
+
+    <label for="participant[last_name]">Last Name</label>
+    <input type="text" name="participant[last_name]" value="<%= @participant.last_name %>">
+
+    <label for="participant[email]">Email</label>
+    <input type="text" name="participant[email]" value="<%= @participant.email %>">
+
+    <input type="submit" value="PLAY">
+
+  </form>
+
+</div>

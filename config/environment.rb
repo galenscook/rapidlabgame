@@ -17,6 +17,8 @@ require 'logger'
 
 require 'sinatra'
 require "sinatra/reloader" if development?
+# require 'sinatra/activerecord'
+# require 'sinatra/activerecord/rake'
 
 require 'erb'
 
