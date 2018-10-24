@@ -6,7 +6,7 @@ document.addEventListener(
     const tagInput = document.getElementById('tagInput');
     const startButton = document.querySelector('button[name="startButton"]');
 
-    tagInput && tagInput.addEventListener('keypress', tagInputHandler);
+    tagInput && tagInput.addEventListener('keyup', tagInputHandler);
     startButton && startButton.addEventListener('click', startGame);
   },
   false
@@ -16,7 +16,7 @@ function startGame() {
   window.location.pathname = 'participants/new';
 }
 function tagInputHandler(event) {
-  if (event.target.value.length === 5) {
+  if (event.target.value.length === 6) {
     const listDiv = document.querySelector('ul[name="tagsList"]');
     if (listDiv.childElementCount === 0) {
       timer = setInterval(setTimer, 1);

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+get '/' do
+  redirect '/participants'
+end
+
 get '/participants' do
   @participants = Participant.all.order(:time)
   erb :"participants/index"
