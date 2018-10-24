@@ -1,20 +1,28 @@
 <div>
-  <h1>Want to win?</h1>
-  <button name="startButton">Play</button>
-  <table>
-    <tr>
-      <th>Place</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Time (seconds)</th>
-    </tr>
-    <% @participants.each_with_index do |participant, index| %>
+  <div class="jumbotron">
+    <h3>Want to win?</h3>
+    <p class="lead">Blah blah stuff about iPad and game</p>
+    <p> 
+      <button class="btn btn-lg btn-success" name="startButton">Play</button>
+    </p>
+  </div>
+  
+  <div class="table-wrapper-scroll-y">
+    <table class="table">
       <tr>
-        <td><%=index + 1%></td>
-        <td><%=participant.first_name%></td>
-        <td><%=participant.last_name%></td>
-        <td><%=participant.time%></td>
+        <th>Place</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Time (seconds)</th>
       </tr>
-      <%end%>
-  </table>
+      <% @participants.each_with_index do |participant, index| %>
+        <tr>
+          <td><%=index + 1%></td>
+          <td><%=participant.first_name%></td>
+          <td><%=participant.last_name%></td>
+          <td><%=participant.time%></td>
+        </tr>
+        <%end%>
+    </table>
+  </div>
 </div>

@@ -1,19 +1,35 @@
-<div>
-  <h2>Enter your information to play</h2>
+<div class="row">
+  <div class="col-md-6 well col-md-offset-3">
+    <h3>Enter your information to play</h3>
 
-  <form id="participant_form" method="post" action="/participants">
+    <form id="participant_form" method="post" action="/participants" role="form">
+      <div class="controls">
 
-    <label for="participant[first_name]">First Name</label>
-    <input type="text" name="participant[first_name]" value="<%= @participant.first_name %>" autofocus>
+      <div class="row">
+        <div class="col-md-6">
+        <div class="form-group">
+          <label for="participant[first_name]">First Name</label>
+          <input type="text" name="participant[first_name]" value="<%= @participant.first_name %>" autofocus class="form-control">
+        </div>
+        </div>
 
-    <label for="participant[last_name]">Last Name</label>
-    <input type="text" name="participant[last_name]" value="<%= @participant.last_name %>">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="participant[last_name]">Last Name</label>
+            <input type="text" name="participant[last_name]" value="<%= @participant.last_name %>" class="form-control">
+          </div>
+        </div>
+      </div>
 
-    <label for="participant[email]">Email</label>
-    <input type="text" name="participant[email]" value="<%= @participant.email %>">
 
-    <input type="submit" value="PLAY">
+      <div class="form-group">
+        <label for="participant[email]">Email</label>
+        <input type="text" name="participant[email]" value="<%= @participant.email %>" class="form-control">
+      </div>
 
-  </form>
+      <input type="submit" value="PLAY" class="btn btn-success btn-send">
+      </div>
 
+    </form>
+  </div>
 </div>

@@ -1,0 +1,58 @@
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  font-size: 26px;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.body {
+  padding-top: 48px;
+}
+
+.game-well {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+tr,
+th {
+  text-align: center;
+}
+
+.scores li {
+  font-size: 45px;
+}
+
+.scoreFinal h1 {
+  font-size: 60px;
+}
+
+#tagInput {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  font-size: 5px;
+}

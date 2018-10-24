@@ -17,6 +17,8 @@ gem 'rake'
 gem 'shotgun'
 gem 'hirb'
 
+gem 'bootstrap-sass', '~> 3.3.5.1'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'

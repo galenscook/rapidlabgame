@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 get '/participants' do
   @participants = Participant.all.order(:time)
   erb :"participants/index"
@@ -23,7 +25,8 @@ patch '/participants/:id' do
   @participant.time = params[:time]
   @participant.save
 
-  status 200
+  rank = Participant.where('time < ?', @participant.time).count + 1
+  return { rank: rank }.to_json
 end
 
 get '/game/:participant_id' do

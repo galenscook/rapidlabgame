@@ -1,8 +1,12 @@
-<div>
-  <p>Timer will start once you scan your first tag.</p>
-  <ul name="tagsList" id=<%= @participant.id%>>
-  </ul>
-  <input type="text" name="tagInput" value="" autofocus>
+<div class="row game-well">
+  <div class="well">
+  <h2>Timer will start once you scan your first tag.</h2>
+  <input type="text" id="tagInput" value="" autofocus>
   <br>
-  <h2 id="scoreDisplay">
+  <ul class="unstyled scores" name="tagsList" id=<%= @participant.id%>>
+  </ul>
+  <div class="row scoreFinal">
+    <h1 id="scoreDisplay">
+    <h1 id="rankDisplay">
+  </div>
 </div>
