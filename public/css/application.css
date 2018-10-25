@@ -56,3 +56,13 @@ th {
   clip: rect(1px, 1px, 1px, 1px);
   font-size: 5px;
 }
+
+.tagImg {
+  height: 60px;
+}
+
+.tagCode {
+  font-weight: bold;
+  min-width: 125px;
+  display: inline-block;
+}

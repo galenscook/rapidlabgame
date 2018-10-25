@@ -1,13 +1,22 @@
-let timer;
+let startTime;
+let endTime;
 let totalMilliseconds = 0;
 document.addEventListener(
   'DOMContentLoaded',
   function() {
     const tagInput = document.getElementById('tagInput');
     const startButton = document.querySelector('button[name="startButton"]');
+    const countdown = document.getElementById('countdown');
 
+    countdown && startCountdown();
     tagInput && tagInput.addEventListener('keyup', tagInputHandler);
     startButton && startButton.addEventListener('click', startGame);
+
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'replay') {
+        location.reload();
+      }
+    });
   },
   false
 );
@@ -17,13 +26,14 @@ function startGame() {
 }
 function tagInputHandler(event) {
   if (event.target.value.length === 6) {
+    document.getElementById('countdown').style.display = 'none';
+
     const listDiv = document.querySelector('ul[name="tagsList"]');
-    if (listDiv.childElementCount === 0) {
-      timer = setInterval(setTimer, 1);
-    }
     listDiv.appendChild(newTagListItem(event.target.value));
     if (listDiv.childElementCount === 5) {
-      clearInterval(timer);
+      endTime = Date.now();
+      totalMilliseconds = endTime - startTime;
+
       handleGameDone(listDiv.id, totalMilliseconds / 1000);
     }
     this.value = '';
@@ -32,13 +42,13 @@ function tagInputHandler(event) {
 
 function newTagListItem(value) {
   const listElement = document.createElement('li');
-  const text = document.createTextNode(value);
-  listElement.appendChild(text);
+  listElement.innerHTML =
+    '<p><span class="tagCode">' +
+    value +
+    "</span><img class='tagImg' src='/assets/" +
+    identifyColor(value) +
+    ".png'></p>";
   return listElement;
-}
-
-function setTimer() {
-  totalMilliseconds++;
 }
 
 function recordTime(userId, time) {
@@ -48,34 +58,34 @@ function recordTime(userId, time) {
     data: { time: time }
   }).done(response => {
     response = JSON.parse(response);
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const rankDisplay = document.getElementById('rankDisplay');
-    scoreDisplay.appendChild(
-      document.createTextNode(`Your time: ${time} seconds!`)
-    );
-    rankDisplay.appendChild(
-      document.createTextNode(`${formatNumber(response.rank)} place`)
+    document.getElementsByClassName('scoreFinal')[0].innerHTML = scoreDisplay(
+      time,
+      response.rank
     );
   });
+}
+
+function scoreDisplay(time, rank) {
+  return (
+    '<div><h1>Your time: ' +
+    time +
+    ' seconds!</h1><h1>' +
+    formatNumber(rank) +
+    ' place</h1><button class="btn btn-lg btn-primary" id="replay">Try again?</button></div>'
+  );
 }
 
 function handleGameDone(userId, time) {
   recordTime(userId, time);
   document.getElementById('tagInput').disabled = true;
-  // const scoreInSeconds = time;
-
-  // const scoreDisplay = document.getElementById('scoreDisplay');
-  // scoreDisplay.appendChild(
-  //   document.createTextNode(`Your time: ${scoreInSeconds} seconds!`)
-  // );
-  timer = setInterval(redirectHome, 5000);
-  totalMilliseconds = null;
+  setTimeout(redirectHome, 10000);
+  startTime = 0;
+  totalMilliseconds = 0;
+  endTime = 0;
 }
 
 function redirectHome() {
   window.location.pathname = 'participants';
-  clearInterval(timer);
-  timer = null;
 }
 
 function formatNumber(number) {
@@ -91,4 +101,85 @@ function formatNumber(number) {
     return number + 'rd';
   }
   return number + 'th';
+}
+
+function startCountdown() {
+  let seconds = 4;
+  const timer = setInterval(() => {
+    seconds--;
+    const text = seconds === 0 ? 'GO' : seconds;
+    document.getElementById('countdown').innerHTML = text;
+
+    if (seconds === 0) {
+      clearInterval(timer);
+      startTime = Date.now();
+    }
+  }, 1000);
+}
+
+function identifyColor(code) {
+  array = code.toLowerCase().split('');
+  if (array[0] < 'g') {
+    if (array[0] !== 'f') {
+      return 'yellow';
+    }
+    if (array[0] < 'g') {
+      if (array[1] !== 'f') {
+        return 'yellow';
+      }
+
+      if (array[2] <= 1) {
+        return 'yellow';
+      } else {
+        return 'white';
+      }
+    }
+  } else if (array[0] < 'j') {
+    if (array[0] !== 'k') {
+      return 'white';
+    }
+    if (array[0] < 'j') {
+      if (array[1] !== 'k') {
+        return 'white';
+      }
+
+      if (array[2] <= 3) {
+        return 'white';
+      } else {
+        return 'red';
+      }
+    }
+  } else if (array[0] < 'q') {
+    if (array[0] !== 'p') {
+      return 'red';
+    }
+    if (array[0] < 'q') {
+      if (array[1] !== 'p') {
+        return 'red';
+      }
+
+      if (array[2] <= 5) {
+        return 'red';
+      } else {
+        return 'blue';
+      }
+    }
+  } else if (array[0] < 'v') {
+    if (array[0] !== 'u') {
+      return 'blue';
+    }
+    if (array[0] < 'v') {
+      if (array[1] !== 'u') {
+        return 'blue';
+      }
+
+      if (array[2] <= 7) {
+        return 'blue';
+      } else {
+        return 'green';
+      }
+    }
+  } else {
+    return 'green';
+  }
 }

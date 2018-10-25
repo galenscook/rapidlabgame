@@ -6,6 +6,7 @@ end
 
 get '/participants' do
   @participants = Participant.all.order(:time)
+  p @participants.first
   erb :"participants/index"
 end
 
@@ -23,6 +24,12 @@ post '/participants' do
     erb :"/participants/new"
   end
 end
+
+# get '/participants/download' do
+#   @participants = Participant.all
+#   prepped_csv = CSV.generate(write_headers: true) do |csv|
+#   end
+# end
 
 patch '/participants/:id' do
   @participant = Participant.find(params[:id])
