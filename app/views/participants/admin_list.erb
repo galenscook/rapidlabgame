@@ -1,26 +1,21 @@
 <div>
-  <div class="jumbotron">
-    <h3>Want to win?</h3>
-    <p class="lead">Be the best. Scan the fastest.</p>
-    <p> 
-      <button class="btn btn-lg btn-success" name="startButton">Play</button>
-    </p>
-  </div>
-  
-  <div class="table-wrapper-scroll-y participants_table">
+  <div class="table-wrapper-scroll-y">
     <table class="table">
       <tr>
         <th>Place</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Email</th>
         <th>Time (seconds)</th>
       </tr>
       <% @participants.each_with_index do |participant, index| %>
-        <tr>
+        <tr id=<%="row#{participant.id}"%>>
           <td><%=index + 1%></td>
           <td><%=participant.first_name%></td>
           <td><%=participant.last_name%></td>
+          <td><%=participant.email%></td>
           <td><%=sprintf("%.3f",participant.time)%></td>
+          <td><button class='btn btn-primary deleteButton' id=<%=participant.id%>>Delete Game</button></td>
         </tr>
         <%end%>
     </table>

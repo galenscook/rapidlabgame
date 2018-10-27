@@ -7,10 +7,15 @@ document.addEventListener(
     const tagInput = document.getElementById('tagInput');
     const startButton = document.querySelector('button[name="startButton"]');
     const countdown = document.getElementById('countdown');
+    const deleteButtons = document.getElementsByClassName('deleteButton');
 
     countdown && startCountdown();
     tagInput && tagInput.addEventListener('keyup', tagInputHandler);
     startButton && startButton.addEventListener('click', startGame);
+
+    if (deleteButtons.length > 0) {
+      addEventListenersToButtons(deleteButtons);
+    }
 
     document.addEventListener('click', e => {
       if (e.target && e.target.id === 'replay') {
@@ -20,6 +25,23 @@ document.addEventListener(
   },
   false
 );
+
+function addEventListenersToButtons(buttons) {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', deleteUser);
+  }
+}
+
+function deleteUser(event) {
+  const userId = this.id;
+  $.ajax({
+    url: `/participants/${userId}`,
+    method: 'delete'
+  }).done(response => {
+    const row = document.getElementById(`row${userId}`);
+    row.parentNode.removeChild(row);
+  });
+}
 
 function startGame() {
   window.location.pathname = 'participants/new';
@@ -71,7 +93,7 @@ function scoreDisplay(time, rank) {
     time +
     ' seconds!</h1><h1>' +
     formatNumber(rank) +
-    ' place</h1><button class="btn btn-lg btn-primary" id="replay">Try again?</button></div>'
+    ' place</h1><button class="btn btn-lg btn-success" id="replay">Try again?</button></div>'
   );
 }
 

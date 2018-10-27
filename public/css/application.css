@@ -6,6 +6,10 @@ html {
   overflow: hidden;
 }
 
+body {
+  background-color: #89cb83;
+}
+
 *,
 *:before,
 *:after {
@@ -15,11 +19,34 @@ html {
   font-size: 26px;
 }
 
+h1 {
+  font-size: 50px;
+}
+
+.header {
+  margin-bottom: 12px;
+}
+
+.header a:hover {
+  text-decoration: none;
+}
+
+.jumbotron h3 {
+  font-size: 46px;
+}
+
+.jumbotron p {
+  font-size: 32px;
+}
 .table-wrapper-scroll-y {
   display: block;
-  max-height: 400px;
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+  max-height: 650px;
+}
+
+.participants_table {
+  max-height: 400px;
 }
 
 .body {
@@ -65,4 +92,18 @@ th {
   font-weight: bold;
   min-width: 125px;
   display: inline-block;
+}
+
+.well,
+.jumbotron {
+  background-image: linear-gradient(to bottom, #a2a2a1 0, #cecece 90%);
+  border-color: #bdbdbd;
+}
+
+.btn-success {
+  background-image: linear-gradient(to bottom, #89cb83 0, #4ea646 100%);
+}
+
+#countdown {
+  font-size: 64px;
 }

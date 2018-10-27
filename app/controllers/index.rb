@@ -6,7 +6,6 @@ end
 
 get '/participants' do
   @participants = Participant.all.order(:time)
-  p @participants.first
   erb :"participants/index"
 end
 
@@ -25,11 +24,22 @@ post '/participants' do
   end
 end
 
-# get '/participants/download' do
-#   @participants = Participant.all
-#   prepped_csv = CSV.generate(write_headers: true) do |csv|
-#   end
-# end
+get '/participants/admin_list' do
+  @participants = Participant.all.order(:time)
+  erb :"participants/admin_list"
+end
+
+get '/participants/download' do
+  participants = Participant.all
+  prepped_csv = CSV.generate do |csv|
+    csv << Participant.attribute_names
+    participants.each { |r| csv << r.attributes.values }
+  end
+  content_type 'application/csv'
+  attachment   'data.csv'
+
+  prepped_csv
+end
 
 patch '/participants/:id' do
   @participant = Participant.find(params[:id])
@@ -38,6 +48,12 @@ patch '/participants/:id' do
 
   rank = Participant.where('time < ?', @participant.time).count + 1
   return { rank: rank }.to_json
+end
+
+delete '/participants/:id' do
+  @participant = Participant.find(params[:id])
+  @participant.destroy
+  202
 end
 
 get '/game/:participant_id' do
